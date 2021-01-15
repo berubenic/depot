@@ -6,7 +6,7 @@
 
 <h1>Your Pragmatic Catalog</h1>
 
-<% unless @view_count <= 5 %>
+<% if @view_count && @view_count > 5 %>
     <h2>
         You have viewed the page
         <%= pluralize(@view_count, 'time') %>

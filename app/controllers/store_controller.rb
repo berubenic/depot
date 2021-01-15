@@ -8,10 +8,10 @@ class StoreController < ApplicationController
 
     def set_view_count
         @view_count = session[:counter]
-        if session[:counter].nil?
-            session[:counter] = 1
-        else
+        if session[:counter]
             session[:counter] += 1
+        else
+            session[:counter] = 1
         end
     end
 end
