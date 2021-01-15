@@ -1,5 +1,6 @@
 class LineItemsController < ApplicationController
     include CurrentCart
+    before_action :reset_view_count, only: [:create]
     before_action :set_cart, only: [:create]
     before_action :set_line_item, only: %i[show edit update destroy]
 
@@ -72,5 +73,9 @@ class LineItemsController < ApplicationController
     # Only allow a list of trusted parameters through.
     def line_item_params
         params.require(:line_item).permit(:product_id, :cart_id)
+    end
+
+    def reset_view_count
+        session[:counter] = nil
     end
 end
