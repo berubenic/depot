@@ -2,8 +2,10 @@
 
 one:
   product: two
+  price: 1
   cart: one
 
 two:
   product: two
+  price: 2
   cart: two
