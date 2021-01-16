@@ -5,11 +5,9 @@
         <meta name="viewport" content="width=device-width,initial-scale=1">
         <%= csrf_meta_tags %>
         <%= csp_meta_tag %>
-
         <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
         <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
     </head>
-
     <body>
         <header class="main">
             <%= image_tag 'logo.svg', alt: 'The Pragmatic Bookshelf' %>
@@ -19,6 +17,11 @@
         </header>
         <section class="content">
             <nav class="side_nav">
+                <% if @cart %>
+                    <div class="carts" id="cart">
+                        <%= render @cart %>
+                    </div>
+                <% end %>
                 <ul>
                     <li>
                         <%= Time.now %>
