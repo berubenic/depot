@@ -66,6 +66,7 @@ class LineItemsController < ApplicationController
         end
         respond_to do |format|
             format.html { redirect_to store_index_url, notice: 'Line item was successfully destroyed.' }
+            format.js { @cart = cart }
             format.json { head :no_content }
         end
     end
