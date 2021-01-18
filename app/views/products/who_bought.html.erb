@@ -1,0 +1,19 @@
+<h1>
+    Who bought <%= @product.title %>
+</h1>
+<% @product.orders.each do |order| %>
+    <h3>Order: #<%=order.id%></h3>
+    <p>Shipped to: <%= order.address %></p>
+    <ul>
+        <ul>
+            <% order.line_items.each do |item| %>
+                <li>Product: <%= item.product.title %> </li>
+                <li>Quantity: <%= item.quantity %> </li>
+                <li>Total Price: <%= number_to_currency(item.total_price) %> </li>
+            <% end %>
+        </ul>
+        <li>Total: <%= number_to_currency(order.line_items.map(&:total_price).sum) %> </li>
+    </ul>
+    <p>Name: <%= order.name %></p>
+    <p>Email: <%= order.email %></p>
+<% end %>
