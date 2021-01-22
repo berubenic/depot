@@ -1,0 +1,7 @@
+<% items.each do |item|%>
+    <tr>
+        <td class="quantity"><%= item.quantity %></td>
+        <td><%= item.product.title %></td>
+        <td class="price"><%= number_to_currency(item.total_price) %></td>
+    </tr>
+<% end %>
