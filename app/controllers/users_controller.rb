@@ -38,12 +38,18 @@ class UsersController < ApplicationController
   # PATCH/PUT /users/1
   # PATCH/PUT /users/1.json
   def update
+    user = User.find(params[:id])
+    current_password = params[:user][:current_password]
     respond_to do |format|
-      if @user.update(user_params)
+      if @user.update(user_params) && user.authenticate(current_password)
         format.html { redirect_to users_url, notice: "User #{@user.name} was successfully updated." }
         format.json { render :show, status: :ok, location: @user }
       else
-        format.html { render :edit }
+
+        format.html do
+          flash.now[:error] = 'Current password does not match' unless user.authenticate(current_password)
+          render :edit
+        end
         format.json { render json: @user.errors, status: :unprocessable_entity }
       end
     end
@@ -56,10 +62,6 @@ class UsersController < ApplicationController
     respond_to do |format|
       format.html { redirect_to users_url, notice: "User #{@user.name} deleted" }
       format.json { head :no_content }
-    end
-
-    rescue_from 'User::Error' do |exception|
-      redirect_to users_url, notice: exception.message
     end
   end
 
